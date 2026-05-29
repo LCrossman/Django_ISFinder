@@ -1,14 +1,14 @@
 # Django IS Database Explorer
 
-A robust, searchable, and version-controlled Django backend designed to manage and index the ISFinder dataset (5,600+ IS elements). 
+A searchable, robut and version-controlled Django backend designed to manage and index the ISFinder dataset (5,600+ IS elements). 
 Note on Upstream Security: These Data are fetched from the official ISFinder database. 
 Since that host uses a legacy HTTP protocol rather than HTTPS, please ensure your local environment is configured to allow a secure connection.
 
-This project transforms flat biological data into a highly relational database and layers a lightning-fast, full-text search engine on top using Haystack and Whoosh
+This project transforms flat biological data into a relational database and layers a full-text search engine on top using Haystack and Whoosh
 ## Features
 
-* **Full-Text Search:** Search across names, origins (Bacterial genus or species), and accession numbers without an SQL database, powered by django-haystack and an inverted index
-* **Relational Architecture:** Clean data models separating ISElement, Family, Origin (Bacterial species), and Accession to prevent data duplication
+* **Full-Text Search:** Search across name, family, group, synonym, origins (Bacterial genus or species), and accession numbers without an SQL database, powered by django-haystack and an inverted index
+* **Relational Architecture:** Data models separating ISElement, Family, Origin (Bacterial species), and Accession to prevent data duplication
 * **Data Undo:** Audit logging and version control in the Django Admin panel using django-simple-history. Every edit is tracked and can be instantly reverted
 * **UI:** Responsive data table interface for scanning high-density scientific results
 ## Stack
