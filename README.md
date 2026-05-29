@@ -1,4 +1,4 @@
-#Django IS Database Explorer
+# Django IS Database Explorer
 
 A robust, searchable, and version-controlled Django backend designed to manage and index the ISFinder dataset (5,600+ IS elements). 
 Note on Upstream Security: These Data are fetched from the official ISFinder database. 
@@ -27,33 +27,33 @@ This project transforms flat biological data into a highly relational database a
 
 Follow these steps to spin up the database and search engine on your local machine.
 
-###Clone and Install with conda (or mamba)
+### Clone and Install with conda (or mamba)
 ```bash
 git clone [https://github.com/LCrossman/ISdata.git](https://github.com/LCrossman/ISdata.git)
 cd ISdata
 conda env create -f environment.yml
 conda activate isdata_env
 ```
-##setup the database schema
+## setup the database schema
 ```bash
 python manage.py migrate
 ```
-##import the data with:
+## import the data with:
 ```bash
 python manage.py import_csv IS_data.csv
 ```
-##generate the haystack index
+## generate the haystack index
 ```bash
 python manage.py rebuild_index
 ```
-##start the development server
+## start the development server
 ```bash
 python manage.py runserver
 ```
 The application will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000)
 Go to localhost: http://127.0.0.1:8000/index/ to view the application, or http://127.0.0.1:8000/search/ to query the ISFinder dataset
 
-**Optional: Accessing the Admin Panel**
+** Optional: Accessing the Admin Panel**
 To view the imported data (and edit) through the Django admin interface, you will need to create a superuser account:
 ```bash
 python manage.py createsuperuser
