@@ -20,8 +20,8 @@ This project transforms flat biological data into a relational database and laye
 
 ## Screenshots
 
-![Search Interface](search_ui.png)
-![Admin History Tracking](admin_history.png)
+![Search Interface](haystack.png)
+![Admin History Tracking](admin.png)
 
 ## For a local Setup & Installation
 
