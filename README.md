@@ -29,7 +29,7 @@ Follow these steps to spin up the database and search engine on your local machi
 
 ### Clone and Install with conda (or mamba)
 ```bash
-git clone [https://github.com/LCrossman/ISdata.git](https://github.com/LCrossman/ISdata.git)
+git clone https://github.com/LCrossman/ISdata.git
 cd ISdata
 conda env create -f environment.yml
 conda activate isdata_env
