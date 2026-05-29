@@ -19,8 +19,10 @@ This project transforms flat biological data into a relational database and laye
 * **Data Tracking:** django-simple-history
 
 ## Screenshots
+Search Interface  
+![Search Interface](haystack.png)  
 
-![Search Interface](haystack.png)
+Admin Interface  
 ![Admin History Tracking](admin.png)
 
 ## For a local Setup & Installation
