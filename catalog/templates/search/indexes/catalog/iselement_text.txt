@@ -1,0 +1,14 @@
+{{ object.name }}
+{{ object.family.name }}
+{% if object.group %}{{ object.group.name }}{% endif %}
+{{ object.origin.name }}
+{{ object.accession.number }}
+{{ object.iso }}
+
+{% for synonym in object.synonyms.all %}
+{{ synonym.name }}
+{% endfor %}
+
+{% for orf in object.orfs.all %}
+ORF{{ orf.aa_length }}
+{% endfor %}

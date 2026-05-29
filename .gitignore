@@ -1,0 +1,20 @@
+#caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+#databases
+db.sqlite3
+db.sqlite3-journal
+
+venv/
+env/
+.venv/
+
+
+whoosh_index/
+.env
+
+#media (image/file uploads)
+media/

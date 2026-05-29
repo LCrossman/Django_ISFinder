@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IS Database Search</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-main: #333;
+            --text-muted: #666;
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --card-bg: #ffffff;
+            --border: #e1e8ed;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px; /* Widened slightly to accommodate columns */
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Search Form Styling (Unchanged) */
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 12px 16px;
+            font-size: 1.1rem;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+
+        .search-btn {
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .search-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .results-header {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* New Table Styling */
+        .table-container {
+            overflow-x: auto;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Alternating row colors for readability */
+        tbody tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+
+        /* Hover highlight */
+        tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .name-cell a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .name-cell a:hover {
+            text-decoration: underline;
+        }
+
+        .numeric {
+            text-align: right;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>IS Database Explorer</h2>
+
+        <form method="get" action=".">
+            <div class="search-box">
+                <input type="search" name="q" class="search-input" 
+                       placeholder="Search by name, origin, accession..." 
+                       value="{{ request.GET.q }}">
+                <button type="submit" class="search-btn">Search</button>
+            </div>
+        </form>
+
+        {% if query %}
+            <div class="results-header">
+                Found matches for "<strong>{{ query }}</strong>"
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Family</th>
+                            <th>Origin</th>
+                            <th class="numeric">Length (bp)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in page.object_list %}
+                            <tr>
+                                <td class="name-cell"><a href="{{ result.object.url }}">{{ result.object.name }}</a></td>
+                                <td>{{ result.object.family.name }}</td>
+                                <td>{{ result.object.origin.name }}</td>
+                                <td class="numeric">{{ result.object.length|default_if_none:"-" }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4" class="no-results">No IS elements found matching your query.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
